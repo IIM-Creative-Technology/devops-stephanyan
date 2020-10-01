@@ -26,6 +26,7 @@ end
 
 group :development do
   gem 'better_errors'
+  gem 'brakeman'
   gem 'did_you_mean'
   gem 'listen', '~> 3.2'
   gem 'spring'
