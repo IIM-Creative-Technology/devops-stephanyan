@@ -12,7 +12,6 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 gem 'sass-rails', '>= 6'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 4.0'
-gem 'rubocop-airbnb'
 
 group :development, :test do
   gem 'factory_bot_rails'
@@ -44,6 +43,3 @@ group :test do
   gem 'simplecov', require: false
   gem 'simplecov-console', require: false
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
