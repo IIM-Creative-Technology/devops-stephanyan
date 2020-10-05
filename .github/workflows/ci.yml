@@ -33,7 +33,7 @@ jobs:
         gem install bundler
 
     - name: Install Gems with Bundler
-      run: bundle install
+      run: bundle install --jobs 4
 
     - name: Prepare Database
       run: bundle exec rails db:prepare
@@ -41,4 +41,6 @@ jobs:
     - name: Run tests
       env:
         DATABASE_URL: postgres://postgres:@localhost:5432/testing_my_blog_test
+        RAILS_ENV: test
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
       run: bundle exec rspec
