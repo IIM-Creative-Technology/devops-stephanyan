@@ -1,0 +1,46 @@
+name: CI on PR
+
+on:
+  pull_request:
+    branches: [master, preprod]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: postgres:11
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1.46.1
+      with:
+        ruby-version: 2.7.0
+
+    - name: Install and run Yarn
+      uses: Borales/actions-yarn@v2.3.0
+        cmd: install
+
+    - name: Install dependencies
+      run: |
+        sudo apt install --yqq libpq-dev
+        gem install bundler
+
+    - name: Install Gems with Bundler
+      run: bundle install
+
+    - name: Prepare Database
+      run: bundle exec rails db:prepare
+
+    - name: Run tests
+      env:
+        DATABASE_URL: postgres://postgres:@localhost:5432/devops_stephanyan_test
+      run: bundle exec rspec
