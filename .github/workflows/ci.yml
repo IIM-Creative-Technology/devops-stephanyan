@@ -40,5 +40,5 @@ jobs:
 
     - name: Run tests
       env:
-        DATABASE_URL: postgres://postgres:@localhost:5432/devops_stephanyan_test
+        DATABASE_URL: postgres://postgres:@localhost:5432/testing_my_blog_test
       run: bundle exec rspec
