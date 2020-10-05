@@ -1,6 +1,8 @@
-name: CI on PR
+name: CI
 
 on:
+  push:
+    branches: [master, preprod]
   pull_request:
     branches: [master, preprod]
 
