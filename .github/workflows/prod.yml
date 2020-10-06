@@ -111,6 +111,9 @@ jobs:
       - name: Migrate database
         run: bundle exec rails db:migrate
 
+      - name: Run RSpec tests
+        run: bundle exec rspec
+
       - name: Deploy to Heroku
         uses: AkhileshNS/heroku-deploy@v3.5.7
         with:
