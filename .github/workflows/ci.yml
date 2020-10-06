@@ -69,4 +69,4 @@ jobs:
       run: bundle install --jobs 4
 
     - name: RuboCop Linter Action
-    uses: andrewmcodes/rubocop-linter-action@v3.3.0
+      uses: andrewmcodes/rubocop-linter-action@v3.3.0
