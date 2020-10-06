@@ -66,3 +66,14 @@ jobs:
 
     - name: Run RSpec tests
       run: bundler exec rspec
+
+  security:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Brakeman linter
+      uses: devmasx/brakeman-linter-action@v1.0.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
