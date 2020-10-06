@@ -39,9 +39,13 @@ jobs:
       run: bundle install --jobs 4
 
     - name: Prepare Database
-      run: bundle exec rails db:prepare
+      run: |
+        bundler exec rails db:create RAILS_ENV=test
+        bundler exec rails db:migrate RAILS_ENV=test
 
     - name: Run tests
       env:
-        DATABASE_URL: postgres://postgres:@localhost:5432/testing_my_blog_test
+        DATABASE_URL: postgres://postgres:@localhost:5432/devops_stephanyan_test
+        RAILS_ENV=test
+        RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}
       run: bundle exec rspec
