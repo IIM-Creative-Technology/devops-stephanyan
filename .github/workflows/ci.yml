@@ -38,14 +38,11 @@ jobs:
     - name: Install Gems with Bundler
       run: bundle install --jobs 4
 
-    - name: Prepare Database
-      run: |
-        bundler exec rails db:create RAILS_ENV=test
-        bundler exec rails db:migrate RAILS_ENV=test
+    - name: Create database
+      run: bundler exec rails db:create RAILS_ENV=test
 
-    - name: Run tests
-      env:
-        DATABASE_URL: postgres://postgres:@localhost:5432/devops_stephanyan_test
-        RAILS_ENV: test
-        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-      run: bundle exec rspec
+    - name: Migrate database
+      run: bundler exec rails db:migrate RAILS_ENV=test
+
+    - name: Run RSpec tests
+      run: bundler exec rspec
