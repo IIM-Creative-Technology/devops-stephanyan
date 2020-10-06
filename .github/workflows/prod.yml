@@ -2,7 +2,7 @@
 #   DATABASE_USER: postgres
 #   DATABASE_PASSWORD: postgres
 
-name: Deploy on Heroku
+name: Deploy master on Heroku
 
 on:
   push:
@@ -87,34 +87,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1.46.1
-        with:
-          ruby-version: 2.7.0
-
-      - name: Install and run Yarn
-        uses: Borales/actions-yarn@v2.3.0
-        with:
-          cmd: install
-
-      - name: Install dependencies
-        run: |
-          sudo apt install -yqq libpq-dev
-          gem install bundler
-
-      - name: Install Gems with Bundler
-        run: bundle install --jobs 4
-
-      - name: Create database
-        run: bundle exec rails db:create
-
-      - name: Migrate database
-        run: bundle exec rails db:migrate
-
-      - name: Run RSpec tests
-        run: bundle exec rspec
-
-      - name: Deploy to Heroku
+      - name: Deploy on Heroku
         uses: AkhileshNS/heroku-deploy@v3.5.7
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
