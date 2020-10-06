@@ -1,3 +1,7 @@
+env:
+  DATABASE_USER: postgres
+  DATABASE_PASSWORD: postgres
+
 name: CI
 
 on:
@@ -14,8 +18,8 @@ jobs:
         image: postgres:11
         ports: ['5432:5432']
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: ${{ env.DATABASE_USER }}
+          POSTGRES_PASSWORD: ${{ env.DATABASE_PASSWORD }}
 
     steps:
     - uses: actions/checkout@v2
