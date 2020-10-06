@@ -5,7 +5,10 @@ env:
 name: Deploy on Heroku
 
 on:
-  push: [master, preprod]
+  push:
+    branches:
+      - master
+      - preprod
 
 jobs:
   linter:
