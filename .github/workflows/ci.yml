@@ -59,13 +59,13 @@ jobs:
       run: bundle install --jobs 4
 
     - name: Create database
-      run: bundler exec rails db:create RAILS_ENV=test
+      run: bundle exec rails db:create RAILS_ENV=test
 
     - name: Migrate database
-      run: bundler exec rails db:migrate RAILS_ENV=test
+      run: bundle exec rails db:migrate RAILS_ENV=test
 
     - name: Run RSpec tests
-      run: bundler exec rspec
+      run: bundle exec rspec
 
   security:
     runs-on: ubuntu-latest
