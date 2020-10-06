@@ -1,6 +1,6 @@
-env:
-  DATABASE_USER: postgres
-  DATABASE_PASSWORD: postgres
+# env:
+#   DATABASE_USER: postgres
+#   DATABASE_PASSWORD: postgres
 
 name: Deploy on Heroku
 
@@ -10,76 +10,76 @@ on:
       - master
 
 jobs:
-  linter:
-    runs-on: ubuntu-latest
+  # linter:
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v2
+  #   steps:
+  #   - uses: actions/checkout@v2
 
-    - name: Setup Ruby
-      uses: ruby/setup-ruby@v1.46.1
-      with:
-        ruby-version: 2.7.0
+  #   - name: Setup Ruby
+  #     uses: ruby/setup-ruby@v1.46.1
+  #     with:
+  #       ruby-version: 2.7.0
 
-    - name: Install dependencies
-      run: gem install bundler
+  #   - name: Install dependencies
+  #     run: gem install bundler
 
-    - name: Install Gems with Bundler
-      run: bundle install --jobs 4
+  #   - name: Install Gems with Bundler
+  #     run: bundle install --jobs 4
 
-    - name: Lint with RuboCop
-      run: bundle exec rubocop
+  #   - name: Lint with RuboCop
+  #     run: bundle exec rubocop
 
-  test:
-    runs-on: ubuntu-latest
-    services:
-      db:
-        image: postgres:11
-        ports: ['5432:5432']
-        env:
-          POSTGRES_USER: ${{ env.DATABASE_USER }}
-          POSTGRES_PASSWORD: ${{ env.DATABASE_PASSWORD }}
+  # test:
+  #   runs-on: ubuntu-latest
+  #   services:
+  #     db:
+  #       image: postgres:11
+  #       ports: ['5432:5432']
+  #       env:
+  #         POSTGRES_USER: ${{ env.DATABASE_USER }}
+  #         POSTGRES_PASSWORD: ${{ env.DATABASE_PASSWORD }}
 
-    steps:
-    - uses: actions/checkout@v2
+  #   steps:
+  #   - uses: actions/checkout@v2
 
-    - name: Setup Ruby
-      uses: ruby/setup-ruby@v1.46.1
-      with:
-        ruby-version: 2.7.0
+  #   - name: Setup Ruby
+  #     uses: ruby/setup-ruby@v1.46.1
+  #     with:
+  #       ruby-version: 2.7.0
 
-    - name: Install and run Yarn
-      uses: Borales/actions-yarn@v2.3.0
-      with:
-        cmd: install
+  #   - name: Install and run Yarn
+  #     uses: Borales/actions-yarn@v2.3.0
+  #     with:
+  #       cmd: install
 
-    - name: Install dependencies
-      run: |
-        sudo apt install -yqq libpq-dev
-        gem install bundler
+  #   - name: Install dependencies
+  #     run: |
+  #       sudo apt install -yqq libpq-dev
+  #       gem install bundler
 
-    - name: Install Gems with Bundler
-      run: bundle install --jobs 4
+  #   - name: Install Gems with Bundler
+  #     run: bundle install --jobs 4
 
-    - name: Create database
-      run: bundle exec rails db:create RAILS_ENV=test
+  #   - name: Create database
+  #     run: bundle exec rails db:create RAILS_ENV=test
 
-    - name: Migrate database
-      run: bundle exec rails db:migrate RAILS_ENV=test
+  #   - name: Migrate database
+  #     run: bundle exec rails db:migrate RAILS_ENV=test
 
-    - name: Run RSpec tests
-      run: bundle exec rspec
+  #   - name: Run RSpec tests
+  #     run: bundle exec rspec
 
-  security:
-    runs-on: ubuntu-latest
+  # security:
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v2
+  #   steps:
+  #   - uses: actions/checkout@v2
 
-    - name: Brakeman linter
-      uses: devmasx/brakeman-linter-action@v1.0.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #   - name: Brakeman linter
+  #     uses: devmasx/brakeman-linter-action@v1.0.0
+  #     env:
+  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   deploy:
     runs-on: ubuntu-latest
