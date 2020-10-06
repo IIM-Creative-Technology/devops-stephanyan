@@ -10,45 +10,6 @@ on:
       - master
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1.46.1
-      with:
-        ruby-version: 2.7.0
-
-
-    - uses: actions/cache@v1
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gem-
-
-    - name: Install Bundler
-      run: |
-        gem install bundler
-
-    - name: Install Gems
-      run: bundle install --path vendor/bundle --jobs 4 --retry 3
-
-    - name: Run Tests
-      run: |
-        bundle exec rake test
-
-    - name: Deploy to Heroku
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
-      if: github.ref == 'refs/heads/master' && job.status == 'success'
-      run: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git origin/master:master
-
   # linter:
   #   runs-on: ubuntu-latest
 
@@ -120,15 +81,42 @@ jobs:
   #     env:
   #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  # deploy:
-  #   runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
 
-  #     - name: Deploy to Heroku
-  #       uses: AkhileshNS/heroku-deploy@v3.5.7
-  #       with:
-  #         heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-  #         heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
-  #         heroku_email: ${{ secrets.HEROKU_EMAIL }}
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1.46.1
+        with:
+          ruby-version: 2.7.0
+
+      - name: Install and run Yarn
+        uses: Borales/actions-yarn@v2.3.0
+        with:
+          cmd: install
+
+      - name: Install dependencies
+        run: |
+          sudo apt install -yqq libpq-dev
+          gem install bundler
+
+      - name: Install Gems with Bundler
+        run: bundle install --jobs 4
+
+      - name: Create database
+        run: bundle exec rails db:create RAILS_ENV=test
+
+      - name: Migrate database
+        run: bundle exec rails db:migrate RAILS_ENV=test
+
+      - name: Run RSpec tests
+        run: bundle exec rspec
+
+      - name: Deploy to Heroku
+        uses: AkhileshNS/heroku-deploy@v3.5.7
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
