@@ -68,5 +68,5 @@ jobs:
     - name: Install Gems with Bundler
       run: bundle install --jobs 4
 
-    - name: RuboCop Linter Action
-      uses: andrewmcodes/rubocop-linter-action@v3.3.0
+    - name: Lint with RuboCop
+      run: bundler exec rubocop
