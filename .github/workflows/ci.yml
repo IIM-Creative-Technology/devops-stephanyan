@@ -46,6 +46,6 @@ jobs:
     - name: Run tests
       env:
         DATABASE_URL: postgres://postgres:@localhost:5432/devops_stephanyan_test
-        RAILS_ENV=test
-        RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}
+        RAILS_ENV: test
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
       run: bundle exec rspec
