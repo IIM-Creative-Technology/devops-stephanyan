@@ -2,7 +2,7 @@ env:
   DATABASE_USER: postgres
   DATABASE_PASSWORD: postgres
 
-name: CI
+name: Continuous Integration
 
 on: pull_request
 
