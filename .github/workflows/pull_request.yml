@@ -2,7 +2,7 @@ env:
   DATABASE_USER: postgres
   DATABASE_PASSWORD: postgres
 
-name: CI
+name: Continuous Integration
 
 on: pull_request
 
@@ -73,7 +73,21 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Brakeman linter
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1.46.1
+      with:
+        ruby-version: 2.7.0
+
+    - name: Install Brakeman
+      run: |
+        gem install brakeman
+
+    - name: Run Brakeman
+      run: |
+        brakeman -f json > tmp/brakeman.json || exit 0
+
+    - name: Brakeman Report
       uses: devmasx/brakeman-linter-action@v1.0.0
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        REPORT_PATH: tmp/brakeman.json
