@@ -78,15 +78,15 @@ jobs:
       with:
         ruby-version: 2.7.0
 
-    - name: Install gems
+    - name: Install Brakeman
       run: |
-        gem install brakeman -v 4.5.0
+        gem install brakeman
 
-    - name: Brakeman report
+    - name: Run Brakeman
       run: |
         brakeman -f json > tmp/brakeman.json || exit 0
 
-    - name: Brakeman Linter
+    - name: Brakeman Report
       uses: devmasx/brakeman-linter-action@v1.0.0
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
