@@ -20,6 +20,10 @@ Ce repository contient deux branches principales liées à un environnement fonc
 
 Ces deux branches sont protégées : pour y apporter des changements, il faut passer par des pull requests. Il est donc impossible de pousser ou de merger ses changements directement sur ces deux branches.
 
+<p align=center>
+  <img src="https://i.ibb.co/7tSJz1N/Screenshot-2020-10-11-at-19-59-14.png" alt="protected branches">
+</p>
+
 ## Workflows et automatisation
 
 ### Les 3 workflows
@@ -37,6 +41,11 @@ on: pull_request
 ```
 
 Lorsqu'une pull request est ouverte et prête à la revue, plusieurs jobs vont s'exécuter en parallèle des autres, dont chacun contiennent plusieurs étapes ou steps. Le workflow qui va s'exécuter est le fichier pull_request.yml qui continent trois jobs : `linter`, `test` et `security`. **Le merge d'une pull request peut se faire seulement si ces trois jobs sont parfaitement au vert**.
+
+<p align=center>
+  <img src="https://i.ibb.co/G5Xk0tB/Screenshot-2020-10-11-at-19-59-49.png" alt="required checks">
+</p>
+
 
 #### Le linting
 
