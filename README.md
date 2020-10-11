@@ -1,10 +1,10 @@
 #  Ruby on Rails : GitHub Actions et Heroku
 
-<div style="display:flex;justify-content:space-between">
+<p align=center>
   <img src="https://avatars0.githubusercontent.com/u/44036562?s=200&v=4" alt="github actions logo" width="200">
   <img src="https://pbs.twimg.com/media/CZGHPChUAAA3jqE.png" alt="ruby on rails logo" width="200">
   <img src="https://dailysmarty-production.s3.amazonaws.com/uploads/post/img/509/feature_thumb_heroku-logo.jpg" alt="heroku logo" width="200">
-</div>
+</p>
 
 ## Introduction
 
@@ -40,9 +40,9 @@ Lorsqu'une pull request est ouverte et prête à la revue, plusieurs jobs vont s
 
 #### Le linting
 
-<div style="display:flex;justify-content: center;">
+<p align=center>
   <img src="https://raw.githubusercontent.com/rubocop-hq/rubocop/master/logo/rubo-logo-square.png" alt="rubocop logo" width="150">
-</div>
+</p>
 
 `linter` : il s'agit du job qui va mettre en place l'environnement qui permettra l'exécution du linter RuboCop. [RuboCop](https://rubocop.org/) est un vérificateur de style de code Ruby (linter) et un formateur basé sur le guide de style de Ruby faite par la communauté. RuboCop a besoin de Ruby:
 
@@ -86,9 +86,9 @@ jobs:
 
 #### Les tests
 
-<div style="display:flex;justify-content: center;">
+<p align=center>
   <img src="https://rspec.info/images/logo.png" alt="rspec logo" width="150">
-</div><br>
+</p>
  
 `test` : il s'agit du job qui va mettre en place l'environnement qui permettra l'exécution de RSpec. [RSpec](https://rspec.info/) est une librairie de tests pour Ruby. Dans ce projet Ruby on Rails, les tests ont besoin d'effectuer des appels dans une base de données. Dans ce workflow, il s'agira d'un service.
 
@@ -149,9 +149,9 @@ test:
 
 #### La détéction de vulnérabilité
 
-<div style="display:flex;justify-content: center;">
+<p align=center>
   <img src="https://camo.githubusercontent.com/92cf013ec2d2c5538bd5d0ec8b1fd600d3614f2b/687474703a2f2f6272616b656d616e7363616e6e65722e6f72672f696d616765732f6c6f676f5f6d656469756d2e706e67" alt="brakeman logo" width="150">
-</div><br>
+</p>
 
 `security` : il s'agit du job qui va mettre en place l'environnement qui permettra l'exécution de Brakeman. [Brakeman](https://brakemanscanner.org/) est un outil d'analyse statique qui détecte les failles des sécurité des applications Ruby on Rails.
 
@@ -188,8 +188,6 @@ security:
 
 ### Les déploiements sur Heroku
 
-
-
 Une fois les différents checks passées et une fois la branche mergée, en fonction de la branche visée, cette application est déployée sur deux environnements: celle de production et de pré-production.
 
 Les workflows respectifs de ces deux environnements sont prod.yml et preprod.yml et contiennent exactement le même job `deploy` qui se charge de pousser en ligne les changements lors de push sur les branches `master` et `preprod`.
@@ -218,7 +216,9 @@ jobs:
 
 Il existe deux applications, donc deux noms différents. `HEROKU_PROD_APP_NAME` est est écrit le workflow prod.yml et `HEROKU_PREPROD_APP_NAME` dans le workflow preprod.yml. Ces clés secrètes sont ajoutées dans les paramètres du repository.
 
-![secret keys](https://i.ibb.co/C5YH5VH/Screenshot-2020-10-11-at-19-00-17.png)
+<p align=center>
+  <img src="https://i.ibb.co/C5YH5VH/Screenshot-2020-10-11-at-19-00-17.png" alt="secret keys">
+</p>
 
 ## Les configurations pour Heroku
 
@@ -241,9 +241,13 @@ Ainsi, la commande `rails db:migrate` sera exécutée lors de la phase "Release 
 
 Ce qui nous donne au total une liste de deux buildpacks.
 
-![buildpacks list](https://i.ibb.co/mCrWDN3/Screenshot-2020-10-11-at-19-16-43.png)
+<p align=center>
+  <img src="https://i.ibb.co/mCrWDN3/Screenshot-2020-10-11-at-19-16-43.png" alt="buildpacks list">
+</p>
 
 Une fois l'application déployée, Heroku saura remplir seul les différentes variables d'environnement. Les variables ajoutées à la main sont `RAILS_MASTER_KEY` et `JEMALLOC_ENABLED`.
 
-![env variables](https://i.ibb.co/mCL0V7q/Screenshot-2020-10-11-at-19-16-53-png-final.png)
+<p align=center>
+  <img src="https://i.ibb.co/mCL0V7q/Screenshot-2020-10-11-at-19-16-53-png-final.png" alt="env variables">
+</p>
 
