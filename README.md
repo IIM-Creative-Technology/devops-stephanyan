@@ -46,6 +46,9 @@ Lorsqu'une pull request est ouverte et prête à la revue, plusieurs jobs vont s
   <img src="https://i.ibb.co/G5Xk0tB/Screenshot-2020-10-11-at-19-59-49.png" alt="required checks">
 </p>
 
+<p align=center>
+  <img src="https://i.ibb.co/P56Tqsh/Screenshot-2020-10-11-at-20-04-44.png" alt="applying ci">
+</p>
 
 #### Le linting
 
