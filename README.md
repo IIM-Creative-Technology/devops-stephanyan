@@ -6,6 +6,23 @@
   <img src="https://dailysmarty-production.s3.amazonaws.com/uploads/post/img/509/feature_thumb_heroku-logo.jpg" alt="heroku logo" width="200">
 </p>
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [Introduction](#introduction)
+- [Branches et environnements](#branches-et-environnements)
+- [Workflows et automatisation](#workflows-et-automatisation)
+  - [Les 3 workflows](#les-3-workflows)
+  - [Les pull requests](#les-pull-requests)
+    - [Le linting](#le-linting)
+    - [Les tests](#les-tests)
+    - [La détéction de vulnérabilité](#la-d%C3%A9t%C3%A9ction-de-vuln%C3%A9rabilit%C3%A9)
+  - [Les déploiements sur Heroku](#les-d%C3%A9ploiements-sur-heroku)
+- [Les configurations pour Heroku](#les-configurations-pour-heroku)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Introduction
 
 Ce README.md explique comment mettre en place un système de déploiement continu (CI/CD) avec [GitHub Actions](https://github.com/features/actions) et [Heroku](https://heroku.com/), pour un blog développé avec le framework Ruby on Rails.
